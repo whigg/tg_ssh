@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
-tg_san_usa = pd.read_csv('10.rlrdata', sep=';', encoding='utf-8')
+tg_san_usa = pd.read_csv('./data/10.rlrdata', sep=';', encoding='utf-8')
 
 temp = np.asarray(tg_san_usa.iloc[:, 1])
 tim = np.asarray(tg_san_usa.iloc[:, 0])
