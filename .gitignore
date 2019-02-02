@@ -1,4 +1,6 @@
 # python ignre
 .idea/
+venv/
 *.png
 *.gz
+test*.*

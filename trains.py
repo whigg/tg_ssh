@@ -7,7 +7,7 @@ import statsmodels.api as sm
 
 # Subsetting the dataset
 # Index 11856 marks the end of year 2013
-df = pd.read_csv('train.csv', nrows=11856)
+df = pd.read_csv('./data/train.csv', nrows=11856)
 
 # Creating train and test set
 # Index 10392 marks the end of October 2013
