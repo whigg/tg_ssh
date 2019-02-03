@@ -1,22 +1,19 @@
-import pandas as pd
 import numpy as np
-import matplotlib.pylab as plt
-from matplotlib.pylab import rcParams
+import pandas as pd
 from datetime import datetime
-#rcParams设定好画布的大小
-rcParams['figure.figsize'] = 15, 6
+import matplotlib.pylab as plt
 
-# read data
-data = pd.read_csv("./data/AirPassengers.csv")
-print(data.head())
-print('\n Data types:')
-print(data.dtypes)
+# 读取数据，pd.read_csv默认生成DataFrame对象，需将其转换成Series对象
+df = pd.read_csv('./data/AirPassengers.csv', encoding='utf-8', index_col='date')
+df.index = pd.to_datetime(df.index)  # 将字符串索引转换成时间索引
+ts = df['x']  # 生成pd.Series对象
+# 查看数据格式
+print(ts.head())
+print(ts.head().index)
+print(ts['1949-01-01'])
+print(ts[datetime(1949, 1, 1)])
+print(ts['1949'])
+print(ts['1949-1': '1949-6'])
 
-dateparse = lambda dates: pd.datetime.strptime(dates, '%Y-%m')
-# 其中parse_dates 表明选择数据中的哪个column作为date-time信息，
-# index_col 告诉pandas以哪个column作为 index
-#  date_parser 使用一个function(本文用lambda表达式代替)，使一个string转换为一个datetime变量
-data = pd.read_csv('./data/AirPassengers.csv', parse_dates=['Month'], index_col='Month',date_parser=dateparse)
-print(data.head())
-print(data.index)
-
+ts_log = np.log(ts)
+test_stationarity.draw_ts(ts_log)
