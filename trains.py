@@ -9,12 +9,17 @@ import statsmodels.api as sm
 # Index 11856 marks the end of year 2013
 df = pd.read_csv('./data/train.csv', nrows=11856)
 
-# Creating train and test set
+#  Creating train and test set
 # Index 10392 marks the end of October 2013
 train = df[0:10392]
 test = df[10392:]
 
 # Aggregating the dataset at daily level
+# now = pd.Timestamp.now()
+# print(now)  # Get the time now
+# now_sh = now.tz_localize("Asia/Shanghai")
+# print(pd.Timestamp(2017, 1, 1, 12))
+
 df['Timestamp'] = pd.to_datetime(df['Datetime'], format='%d-%m-%Y %H:%M')
 df.index = df['Timestamp']
 df = df.resample('D').mean()  # D表示day,这里是日均值的重采样，前面设置了日期的格式，这里可以使用这种表达,
@@ -33,7 +38,7 @@ train.Count.plot(figsize=(15, 8), title='Daily Ridership', fontsize=14)
 test.Count.plot(figsize=(15, 8), fontsize=14)
 # plt.show()
 #
-dd = np.asarray(train['Count']) # 数据，人数
+dd = np.asarray(train['Count'])  # 数据，人数
 y_hat = test.copy()
 
 y_hat['naive'] = dd[len(dd) - 1]
